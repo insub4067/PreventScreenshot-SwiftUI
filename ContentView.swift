@@ -26,6 +26,7 @@ public struct ScreenshotPreventView<Content: View>: UIViewRepresentable {
     }
     
     public func makeUIView(context: Context) -> UIView {
+        
         let secureTextField = UITextField()
         secureTextField.isSecureTextEntry = true
         secureTextField.isUserInteractionEnabled = false
@@ -38,16 +39,16 @@ public struct ScreenshotPreventView<Content: View>: UIViewRepresentable {
             subview.removeFromSuperview()
         }
         
-        let contentHostingController = UIHostingController(rootView: content())
-        contentHostingController.view.backgroundColor = .clear
-        contentHostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        let hController = UIHostingController(rootView: content())
+        hController.view.backgroundColor = .clear
+        hController.view.translatesAutoresizingMaskIntoConstraints = false
         
-        secureView.addSubview(contentHostingController.view)
+        secureView.addSubview(hController.view)
         NSLayoutConstraint.activate([
-            contentHostingController.view.topAnchor.constraint(equalTo: secureView.topAnchor),
-            contentHostingController.view.bottomAnchor.constraint(equalTo: secureView.bottomAnchor),
-            contentHostingController.view.leadingAnchor.constraint(equalTo: secureView.leadingAnchor),
-            contentHostingController.view.trailingAnchor.constraint(equalTo: secureView.trailingAnchor)
+            hController.view.topAnchor.constraint(equalTo: secureView.topAnchor),
+            hController.view.bottomAnchor.constraint(equalTo: secureView.bottomAnchor),
+            hController.view.leadingAnchor.constraint(equalTo: secureView.leadingAnchor),
+            hController.view.trailingAnchor.constraint(equalTo: secureView.trailingAnchor)
         ])
         
         return secureView
